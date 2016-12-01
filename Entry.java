@@ -15,7 +15,7 @@ public class Entry<E>
 	 * Parameterized Entry constructor
 	 * @param v - value of entry
 	 */
-	public Entry(E v)
+	public Entry(E v)	//should we give the constructor two parameters? value and key?
 	{
 		value = v;
 	}

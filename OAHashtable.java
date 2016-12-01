@@ -64,9 +64,50 @@ public class OAHashtable<E>
 	 * Method to remove an object from the hash table
 	 * @param it - object to be removed
 	 */
+	//need to use find/locate method within remove method?
 	public void remove(Entry<E> it)
 	{
 	}
+	
+//---------------------------------------------------------------------		
+	
+	//find method from website java made so easy
+	public int locate(Entry<E> key)
+	{
+		int hash = hash(key);
+		
+		if (table[hash] == null)
+			return null;
+		else
+		{
+			Entry<E> temp = table[hash];
+			while(temp != null)
+			{
+				if(temp.key.equals(key))
+					return temp.value;
+				temp = temp.next;
+			}
+		return null;	
+		}
+	}
+	
+//---------------------------------------------------------------------	
+	//textbook version for find(Object key)
+	private int find(Entry<E> key)
+	{
+		int index = key.hashCode() % table.length;
+		if (index <0)
+			index += table.length;
+		while((table[index != null]) && (!key.equals(table[index].getKey())))
+		{
+			index++;
+			if(index >=  table.length)
+				index = 0;
+		}
+		return index;
+	}
+	
+//---------------------------------------------------------------------	
 	
 	/**
 	 * Method to rehash the table, doubling the size of the table
