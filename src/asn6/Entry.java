@@ -7,10 +7,10 @@ package asn6;
 /**
  * Generic hashtable element type
  */
-public class Entry<E>
+public class Entry<K,V>
 {
-	private K key;		// Given
-	private V value;	// Deterministic 
+	protected K key;		// Given
+	protected V value;		// Deterministic data
 	
 	/**
 	 * Parameterized Entry constructor

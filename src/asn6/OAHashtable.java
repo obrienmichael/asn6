@@ -1,24 +1,23 @@
 package asn6;
 
-//This is our code.
+// This is our code.
 // Michael O'Brien, Sydney Pugh
 // CS312
 
-//import java.util.Random;
+import java.util.Random;
 import java.util.Enumeration; //allows for methods: boolean hasMoreElements() and <E> nextElement
 import java.util.Iterator;    //maybe this is a better option that Enumerator
 
 /**
  * Hashtable using open addressing
  */
-//sydney git push test
-public class OAHashtable<E> 
+public class OAHashtable<K,V> 
 {
-	private Entry<E>[] table;
+	private Entry<K,V>[] table;
 	private double loadThreshold;
 	private int numKeys;
 	private int numDeletes;
-	private final Entry<E> DELETED = new Entry<E>(null);
+	private final Entry<K,V> DELETED = new Entry(null, null);
 	//private final int UNUSED = -1;
 
 	/**
@@ -37,14 +36,14 @@ public class OAHashtable<E>
 	 * Method to add an object into the hash table
 	 * @param it - object to be inserted
 	 */
-	public void add(Entry<E> it)
+	public void add(K nkey, V nvalue)
 	{
-		int index = it.hashCode() % table.length;
+		int index = nkey.hashCode() % table.length;
 
 		if(index < 0)
 			index += table.length;
 
-		while(table[index] != null && table[index] != it)
+		while(table[index] != null && table[index].key.equals(nkey))
 		{
 			index++;
 			if(index >= table.length)
@@ -52,8 +51,8 @@ public class OAHashtable<E>
 		}
 
 		if(table[index] == null)
-		{
-			table[index] = it;
+		{		
+			table[index] = new Entry<K, V>(nkey, nvalue);
 			numKeys++;
 
 			double load = (double) (numKeys + numDeletes) / table.length;
@@ -62,12 +61,17 @@ public class OAHashtable<E>
 		}
 	}
 	
+	/*private Entry<K, V> Entry(K nkey, V nvalue) {
+		// TODO Auto-generated method stub
+		return null;
+	}*/
+
 	/**
 	 * Method to remove an object from the hash table
 	 * @param it - object to be removed
 	 */
 	//need to use find/locate method within remove method?
-	public void remove(Entry<E> it)
+	public void remove(Entry<K,V> it)
 	{
 	}
 	
@@ -75,7 +79,7 @@ public class OAHashtable<E>
 	
 	//find method from website javamadesoeasy
 	//does not require a getter method but requires a next method to iterate through
-	public int locate(Entry<E> key)
+	/*public int locate(Entry<K,V> key)
 	{
 		int hash = hash(key);
 		//Enumeration en = table.keys(); --> temp = temp.nextElement(); ?
@@ -111,7 +115,7 @@ public class OAHashtable<E>
 				index = 0;
 		}
 		return index;
-	}
+	}*/
 	
 //---------------------------------------------------------------------	
 	
@@ -123,15 +127,15 @@ public class OAHashtable<E>
 	@SuppressWarnings("unchecked")
 	private void rehash()
 	{
-		Entry<E>[] oldTable = table;
+		Entry<K,V>[] oldTable = table;
 		table = new Entry[oldTable.length * 2];
 		numKeys = 0;
 		numDeletes = 0;
 
-		for(Entry<E> element : oldTable)
+		for(Entry<K,V> element : oldTable)
 		{
 			if(element != null && element != DELETED)
-				add(element);
+				add(element.key, element.value);
 		}
 	}
 
@@ -140,20 +144,20 @@ public class OAHashtable<E>
 	 */
 	public void dumpTable()
 	{
-		System.out.print("Table content: ");
+		System.out.println("Table content: ");
 		for(int i=0; i<table.length; i++)
-			System.out.print(" " + table[i]);
+			System.out.println(" " + table[i]);
 		System.out.println();
 	}
 	
 	public static void main(String [] args)
 	{
-		Entry<Integer, Integer> n = new Entry(3,3);
-		System.out.println(n);
+		//Entry<Integer, Integer> n = new Entry(3,3);
+		//System.out.println(n);
 		
 		
 		//Random r = new Random(42);
-		//OAHashtable<Integer> ht = new OAHashtable<Integer>(5, 0.1);
+		OAHashtable<Integer,Integer> ht = new OAHashtable<Integer,Integer>(5, 0.1);
 
 		/*for(int i=0; i<20; i++)
 	    {
@@ -161,13 +165,13 @@ public class OAHashtable<E>
 	      ht.add(x);
 	      System.out.print(" " + x);
 	    }*/
-		/*
+		
 		ht.dumpTable();
 
-		ht.add(new Entry<Integer>(3));
-		ht.add(new Entry<Integer>(4));
-		ht.add(new Entry<Integer>(5));
+		ht.add(3,3);
+		ht.add(4,4);
+		ht.add(5,5);
 
-		ht.dumpTable();*/
+		ht.dumpTable();
 	}
 }

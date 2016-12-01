@@ -48,7 +48,7 @@ public class CHashtable
 		
 	}
 	
-	public int locateInt(int id)
+	public void locateInt(int id)
 	{
 		
 	}
