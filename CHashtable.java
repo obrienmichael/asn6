@@ -48,6 +48,11 @@ public class CHashtable
 		
 	}
 	
+	public int locateInt(int id)
+	{
+		
+	}
+	
 	/**
 	 * Method to rehash the table, doubling the size of the table
 	 * and transferring only non-null and non-deleted elements

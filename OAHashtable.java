@@ -6,6 +6,8 @@ package asn6;
 // THIS IS A GITHUB PUSH TEST
 
 //import java.util.Random;
+import java.util.Enumeration; //allows for methods: boolean hasMoreElements() and <E> nextElement
+import java.util.Iterator; //maybe this is a better option that Enumerator
 
 /**
  * Hashtable using open addressing
@@ -75,6 +77,7 @@ public class OAHashtable<E>
 	public int locate(Entry<E> key)
 	{
 		int hash = hash(key);
+		//Enumeration en = table.keys(); --> temp = temp.nextElement(); ?
 		
 		if (table[hash] == null)
 			return null;
@@ -96,9 +99,11 @@ public class OAHashtable<E>
 	private int find(Entry<E> key)
 	{
 		int index = key.hashCode() % table.length;
-		if (index <0)
+		
+		if (index < 0)
 			index += table.length;
-		while((table[index != null]) && (!key.equals(table[index].getKey())))
+		
+		while ((table[index] != null) && (!key.equals(table[index].getKey())))
 		{
 			index++;
 			if(index >=  table.length)
