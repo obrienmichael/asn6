@@ -3,11 +3,10 @@ package asn6;
 //This is our code.
 // Michael O'Brien, Sydney Pugh
 // CS312
-// THIS IS A GITHUB PUSH TEST
 
 //import java.util.Random;
 import java.util.Enumeration; //allows for methods: boolean hasMoreElements() and <E> nextElement
-import java.util.Iterator; //maybe this is a better option that Enumerator
+import java.util.Iterator;    //maybe this is a better option that Enumerator
 
 /**
  * Hashtable using open addressing
@@ -73,7 +72,8 @@ public class OAHashtable<E>
 	
 //---------------------------------------------------------------------		
 	
-	//find method from website java made so easy
+	//find method from website javamadesoeasy
+	//does not require a getter method but requires a next method to iterate through
 	public int locate(Entry<E> key)
 	{
 		int hash = hash(key);
