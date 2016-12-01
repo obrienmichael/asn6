@@ -17,8 +17,7 @@ public class OAHashtable<K,V>
 	private double loadThreshold;
 	private int numKeys;
 	private int numDeletes;
-	private final Entry<K,V> DELETED = new Entry(null, null);
-	//private final int UNUSED = -1;
+	private final Entry<K,V> DELETED = new Entry<K,V>(null, null);
 
 	/**
 	 * Parameterized OAHashtable constructor
@@ -73,6 +72,7 @@ public class OAHashtable<K,V>
 	//need to use find/locate method within remove method?
 	public void remove(Entry<K,V> it)
 	{
+		
 	}
 	
 //---------------------------------------------------------------------		
