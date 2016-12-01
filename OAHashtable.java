@@ -148,8 +148,12 @@ public class OAHashtable<E>
 	
 	public static void main(String [] args)
 	{
+		Entry<Integer, Integer> n = new Entry(3,3);
+		System.out.println(n);
+		
+		
 		//Random r = new Random(42);
-		OAHashtable<Integer> ht = new OAHashtable<Integer>(5, 0.1);
+		//OAHashtable<Integer> ht = new OAHashtable<Integer>(5, 0.1);
 
 		/*for(int i=0; i<20; i++)
 	    {
@@ -157,13 +161,13 @@ public class OAHashtable<E>
 	      ht.add(x);
 	      System.out.print(" " + x);
 	    }*/
-		
+		/*
 		ht.dumpTable();
 
 		ht.add(new Entry<Integer>(3));
 		ht.add(new Entry<Integer>(4));
 		ht.add(new Entry<Integer>(5));
 
-		ht.dumpTable();
+		ht.dumpTable();*/
 	}
 }

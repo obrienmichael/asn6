@@ -9,15 +9,17 @@ package asn6;
  */
 public class Entry<E>
 {
-	private E value;
+	private K key;		// Given
+	private V value;	// Deterministic 
 	
 	/**
 	 * Parameterized Entry constructor
 	 * @param v - value of entry
 	 */
-	public Entry(E v)	//should we give the constructor two parameters? value and key?
+	public Entry(K key, V value)	//should we give the constructor two parameters? value and key?
 	{
-		value = v;
+		this.key = key;
+		this.value = value;
 	}
 	
 	/**
@@ -26,6 +28,6 @@ public class Entry<E>
 	@Override
 	public String toString()
 	{
-		return value.toString();
+		return "Key is " + key.toString() + " with value of " + value.toString();
 	}
 }
