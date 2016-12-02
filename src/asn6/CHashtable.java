@@ -3,11 +3,9 @@ package asn6;
 import java.util.ArrayList;
 import java.util.Random;
 
-// This is our code.//Michael O'Brien, Sydney Pugh
+// This is our code
+//Michael O'Brien, Sydney Pugh
 //CS312
-
-// Michael O'Brien, Sydney Pugh
-// CS312
 
 /**
  * Hashtable using chaining

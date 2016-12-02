@@ -1,6 +1,6 @@
 package asn6;
 
-//This is our code.
+//This is our code
 //Michael O'Brien, Sydney Pugh
 //CS312
 

@@ -4,7 +4,7 @@ import java.util.Random;
 import java.util.Enumeration; //allows for methods: boolean hasMoreElements() and <E> nextElement
 import java.util.Iterator;    //maybe this is a better option that Enumerator
 
-// This is our code.
+// This is our code
 // Michael O'Brien, Sydney Pugh
 // CS312
 
