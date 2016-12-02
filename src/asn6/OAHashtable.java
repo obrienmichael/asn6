@@ -46,12 +46,11 @@ public class OAHashtable
 	public void add(E in)
 	{
 		@SuppressWarnings("unchecked")
-		Entry<K,V> en = new Entry<K,V>(nkey, nvalue);
-		int index = find(en);
+		int index = find(in);
 
 		if(table[index] == null)
 		{		
-			table[index] = en;
+			table[index] = in;
 			numKeys++;
 
 			double load = (double) (numKeys + numDeletes) / table.length;
@@ -103,14 +102,14 @@ public class OAHashtable
 	 * @param subject
 	 * @return 
 	 */
-	private int find(Entry<K,V> subject)
+	private int find(E subject)
 	{
-		int index = subject.key.hashCode() % table.length;
+		int index = subject.value.hashCode() % table.length;
 		
 		if (index < 0)
 			index += table.length;
 		
-		while ((table[index] != null) && (!subject.key.equals(table[index])))
+		while ((table[index] != null) && (!subject.value.equals(table[index])))
 		{
 			index++;
 			if(index >=  table.length)
@@ -130,15 +129,15 @@ public class OAHashtable
 	{
 		numRehashes++;
 		
-		Entry<K,V>[] oldTable = table;
-		table = new Entry[2 * oldTable.length + 1];
+		E[] oldTable = table;
+		table = new E[2 * oldTable.length + 1];
 		numKeys = 0;
 		numDeletes = 0;
 
-		for(Entry<K,V> element : oldTable)
+		for(E element : oldTable)
 		{
 			if(element != null && element != DELETED)
-				add(element.key, element.value);
+				add(element);
 		}
 	}
 
