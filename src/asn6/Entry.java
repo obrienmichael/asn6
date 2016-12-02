@@ -7,6 +7,7 @@ package asn6;
 /**
  * Generic hashtable element type
  */
+
 public class Entry<K,V>
 {
 	protected K key;		// Given
