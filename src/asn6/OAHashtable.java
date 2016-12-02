@@ -10,25 +10,32 @@ import java.util.Iterator;    //maybe this is a better option that Enumerator
 
 /**
  * Hashtable using open addressing
+ * @param <V>
+ * @param <K>
  */
-public class OAHashtable<K,V> 
+public class OAHashtable<K,V>
 {
 	private Entry<K,V>[] table;
 	private double loadThreshold;
 	private int numKeys;
 	private int numDeletes;
-	private final Entry<K,V> DELETED = new Entry<K,V>(null, null);
+	private int probes;
+	private int numFinds;
+	private final Entry<K,V> DELETED;
 
 	/**
 	 * Parameterized OAHashtable constructor
 	 * @param size - size 
 	 * @param load - load threshold
 	 */
-	@SuppressWarnings("unchecked")
-	public OAHashtable(int size, double load)
+	public OAHashtable(int size, double load, Entry<K,V> deleted)
 	{
-		table = new Entry[size];
+		@SuppressWarnings("unchecked")
+		Entry<K,V>[] t = (Entry<K,V>[]) new Comparable[size];
+		table = t;
 		loadThreshold = load;
+		DELETED = deleted;
+		probes = 0;
 	}
 	
 	/**
@@ -37,21 +44,13 @@ public class OAHashtable<K,V>
 	 */
 	public void add(K nkey, V nvalue)
 	{
-		int index = nkey.hashCode() % table.length;
-
-		if(index < 0)
-			index += table.length;
-
-		while(table[index] != null && table[index].key.equals(nkey))
-		{
-			index++;
-			if(index >= table.length)
-				index = 0;
-		}
+		@SuppressWarnings("unchecked")
+		Entry<K,V> en = new Entry<K,V>(nkey, nvalue);
+		int index = find(en);
 
 		if(table[index] == null)
 		{		
-			table[index] = new Entry<K, V>(nkey, nvalue);
+			table[index] = en;
 			numKeys++;
 
 			double load = (double) (numKeys + numDeletes) / table.length;
@@ -97,27 +96,28 @@ public class OAHashtable<K,V>
 			}
 		return null;	
 		}
-	}
+	}*/
 	
 //---------------------------------------------------------------------	
 	//textbook version for find(Object key)
-	private int find(Entry<E> key)
+	private int find(Entry<K,V> subject)
 	{
-		int index = key.hashCode() % table.length;
+		int index = subject.key.hashCode() % table.length;
 		
 		if (index < 0)
 			index += table.length;
 		
-		while ((table[index] != null) && (!key.equals(table[index].getKey())))
+		while ((table[index] != null) && (!subject.key.equals(table[index])))
 		{
 			index++;
 			if(index >=  table.length)
 				index = 0;
 		}
 		return index;
-	}*/
+	}
 	
 //---------------------------------------------------------------------	
+	
 	
 	/**
 	 * Method to rehash the table, doubling the size of the table
@@ -128,7 +128,7 @@ public class OAHashtable<K,V>
 	private void rehash()
 	{
 		Entry<K,V>[] oldTable = table;
-		table = new Entry[oldTable.length * 2];
+		table = new Entry[2 * oldTable.length + 1];
 		numKeys = 0;
 		numDeletes = 0;
 
@@ -157,7 +157,8 @@ public class OAHashtable<K,V>
 		
 		
 		//Random r = new Random(42);
-		OAHashtable<Integer,Integer> ht = new OAHashtable<Integer,Integer>(5, 0.1);
+		Entry<Integer,Integer> deleted = new Entry<Integer, Integer>(-1, -1);
+		OAHashtable<Integer,Integer> ht = new OAHashtable<Integer, Integer>(5, 0.1, deleted);
 
 		/*for(int i=0; i<20; i++)
 	    {
@@ -171,7 +172,44 @@ public class OAHashtable<K,V>
 		ht.add(3,3);
 		ht.add(4,4);
 		ht.add(5,5);
-
+		
 		ht.dumpTable();
+	}
+	
+	
+	
+	
+	
+	static class Entry<K,V>
+	{
+		private K key;			// Given
+		private V value;		// Deterministic data
+		
+		/**
+		 * Parameterized Entry constructor
+		 * @param v - value of entry
+		 */
+		public Entry(K key, V value)	//should we give the constructor two parameters? value and key?
+		{
+			this.key = key;
+			this.value = value;
+		}
+		
+		/**
+		 * Method to check whether two values 
+		 */
+		public boolean equals(Entry<K,V> entry)
+		{
+			return (entry.key == this.key);
+		}
+		
+		/**
+		 * Method to generate string representation of Entry
+		 */
+		@Override
+		public String toString()
+		{
+			return "Key is " + key.toString() + " with value of " + value.toString();
+		}
 	}
 }

@@ -23,6 +23,14 @@ public class Entry<K,V>
 	}
 	
 	/**
+	 * Method to check whether two values 
+	 */
+	public boolean equals(Entry<K,V> entry)
+	{
+		return (entry.key == this.key);
+	}
+	
+	/**
 	 * Method to generate string representation of Entry
 	 */
 	@Override
