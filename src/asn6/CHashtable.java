@@ -3,8 +3,6 @@ package asn6;
 import java.util.ArrayList;
 import java.util.Random;
 
-import asn6.OAHashtable.Entry;
-
 // This is our code.//Michael O'Brien, Sydney Pugh
 //CS312
 
@@ -19,7 +17,9 @@ public class CHashtable
 	private ArrayList<E>[] table;
 	private double loadThreshold;
 	private int numKeys;
-	private int probes;
+	private int numRehashes;
+	private int numProbes;
+	
 	
 	/**
 	 * Parameterized CHashtable constructor
@@ -36,8 +36,9 @@ public class CHashtable
 			table[i] = new ArrayList<E>();
 		
 		loadThreshold = load;
-		probes = 0;
+		numProbes = 0;
 	}
+	
 	
 	/**
 	 * Method to add an object into the hash table
@@ -63,6 +64,7 @@ public class CHashtable
 			rehash();
 	}
 	
+	
 	/**
 	 * Method to remove an object from the hash table
 	 * @param it - object to be removed
@@ -72,6 +74,7 @@ public class CHashtable
 		
 	}
 	
+	
 	/**
 	 * Method to rehash the table, doubling the size of the table
 	 * and transferring only non-null and non-deleted elements
@@ -80,6 +83,8 @@ public class CHashtable
 	@SuppressWarnings("unchecked")
 	private void rehash()
 	{
+		numRehashes++;
+		
 		ArrayList<E>[] oldTable = table;
 		table = (ArrayList<E>[]) new ArrayList[2 * oldTable.length + 1];
 		
@@ -95,6 +100,18 @@ public class CHashtable
 		}
 	}
 	
+	
+	/**
+	 * Method to print the number of probes and the
+	 * number of rehashes
+	 */
+	public void displayData()
+	{
+		System.out.println("Number of probes: " + numProbes);
+		System.out.println("Number of rehashes: " + numRehashes);
+	}
+
+	
 	/**
 	 * Method to print out contents of the hash table
 	 */
@@ -105,19 +122,20 @@ public class CHashtable
 			System.out.println(list + " ");
 	}
 	
+	
 	public static void main(String[] args)
 	{
 		Random r = new Random(42);
 		CHashtable ht = new CHashtable(4, 0.1);
 		
-		for(int i=0; i<100000; i++)
+		for(int i=0; i<1000; i++)
 		{
 			int x = Math.abs(r.nextInt()) % 100000;
 			ht.add(new E(x));
+			System.out.println(x);
 		}
 		
 		ht.dumpTable();
-		
-		System.out.println(ht.table.length);
+		ht.displayData();
 	}
 }

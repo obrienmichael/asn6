@@ -1,48 +1,49 @@
 package asn6;
 
-// This is our code.
-// Michael O'Brien, Sydney Pugh
-// CS312
-
 import java.util.Random;
 import java.util.Enumeration; //allows for methods: boolean hasMoreElements() and <E> nextElement
 import java.util.Iterator;    //maybe this is a better option that Enumerator
 
+// This is our code.
+// Michael O'Brien, Sydney Pugh
+// CS312
+
 /**
  * Hashtable using open addressing
- * @param <V>
- * @param <K>
  */
-public class OAHashtable<K,V>
+public class OAHashtable
 {
-	private Entry<K,V>[] table;
+	private E[] table;
 	private double loadThreshold;
 	private int numKeys;
 	private int numDeletes;
-	private int probes;
+	private int numProbes;
+	private int numRehashes;
 	private int numFinds;
-	private final Entry<K,V> DELETED;
+	private final E DELETED;
 
+	
 	/**
 	 * Parameterized OAHashtable constructor
 	 * @param size - size 
 	 * @param load - load threshold
 	 */
-	public OAHashtable(int size, double load, Entry<K,V> deleted)
+	public OAHashtable(int size, double load, E deleted)
 	{
 		@SuppressWarnings("unchecked")
-		Entry<K,V>[] t = (Entry<K,V>[]) new Comparable[size];
+		E[] t = (E[]) new Comparable[size];
 		table = t;
 		loadThreshold = load;
 		DELETED = deleted;
-		probes = 0;
+		numProbes = 0;
 	}
+	
 	
 	/**
 	 * Method to add an object into the hash table
-	 * @param it - object to be inserted
+	 * @param in - object to be inserted
 	 */
-	public void add(K nkey, V nvalue)
+	public void add(E in)
 	{
 		@SuppressWarnings("unchecked")
 		Entry<K,V> en = new Entry<K,V>(nkey, nvalue);
@@ -58,21 +59,18 @@ public class OAHashtable<K,V>
 				rehash();
 		}
 	}
-	
-	/*private Entry<K, V> Entry(K nkey, V nvalue) {
-		// TODO Auto-generated method stub
-		return null;
-	}*/
+
 
 	/**
 	 * Method to remove an object from the hash table
 	 * @param it - object to be removed
 	 */
 	//need to use find/locate method within remove method?
-	public void remove(Entry<K,V> it)
+	public void remove(E it)
 	{
 		
 	}
+	
 	
 //---------------------------------------------------------------------		
 	
@@ -100,6 +98,11 @@ public class OAHashtable<K,V>
 	
 //---------------------------------------------------------------------	
 	//textbook version for find(Object key)
+	/**
+	 * Method to find the index of a given object in the hashtable
+	 * @param subject
+	 * @return 
+	 */
 	private int find(Entry<K,V> subject)
 	{
 		int index = subject.key.hashCode() % table.length;
@@ -115,9 +118,7 @@ public class OAHashtable<K,V>
 		}
 		return index;
 	}
-	
-//---------------------------------------------------------------------	
-	
+		
 	
 	/**
 	 * Method to rehash the table, doubling the size of the table
@@ -127,6 +128,8 @@ public class OAHashtable<K,V>
 	@SuppressWarnings("unchecked")
 	private void rehash()
 	{
+		numRehashes++;
+		
 		Entry<K,V>[] oldTable = table;
 		table = new Entry[2 * oldTable.length + 1];
 		numKeys = 0;
@@ -139,6 +142,18 @@ public class OAHashtable<K,V>
 		}
 	}
 
+	
+	/**
+	 * Method to print the number of probes and the
+	 * number of rehashes
+	 */
+	public void displayData()
+	{
+		System.out.println("Number of probes: " + numProbes);
+		System.out.println("Number of rehashes: " + numRehashes);
+	}
+	
+	
 	/**
 	 * Method to print out contents of the hash table
 	 */
@@ -150,66 +165,21 @@ public class OAHashtable<K,V>
 		System.out.println();
 	}
 	
+	
 	public static void main(String [] args)
 	{
-		//Entry<Integer, Integer> n = new Entry(3,3);
-		//System.out.println(n);
-		
-		
-		//Random r = new Random(42);
-		Entry<Integer,Integer> deleted = new Entry<Integer, Integer>(-1, -1);
-		OAHashtable<Integer,Integer> ht = new OAHashtable<Integer, Integer>(5, 0.1, deleted);
+		Random r = new Random(42);
+		E deleted = new E(-1);
+		OAHashtable ht = new OAHashtable(5, 0.1, deleted);
 
-		/*for(int i=0; i<20; i++)
+		for(int i=0; i<20; i++)
 	    {
 	      int x = Math.abs(r.nextInt()) % 1000000;
-	      ht.add(x);
+	      ht.add(new E(x));
 	      System.out.print(" " + x);
-	    }*/
+	    }
 		
 		ht.dumpTable();
-
-		ht.add(3,3);
-		ht.add(4,4);
-		ht.add(5,5);
-		
-		ht.dumpTable();
-	}
-	
-	
-	
-	
-	
-	static class Entry<K,V>
-	{
-		private K key;			// Given
-		private V value;		// Deterministic data
-		
-		/**
-		 * Parameterized Entry constructor
-		 * @param v - value of entry
-		 */
-		public Entry(K key, V value)	//should we give the constructor two parameters? value and key?
-		{
-			this.key = key;
-			this.value = value;
-		}
-		
-		/**
-		 * Method to check whether two values 
-		 */
-		public boolean equals(Entry<K,V> entry)
-		{
-			return (entry.key == this.key);
-		}
-		
-		/**
-		 * Method to generate string representation of Entry
-		 */
-		@Override
-		public String toString()
-		{
-			return "Key is " + key.toString() + " with value of " + value.toString();
-		}
+		ht.displayData();
 	}
 }
