@@ -1,6 +1,9 @@
 package asn6;
 
 import java.util.ArrayList;
+import java.util.Random;
+
+import asn6.OAHashtable.Entry;
 
 // This is our code.//Michael O'Brien, Sydney Pugh
 //CS312
@@ -47,11 +50,14 @@ public class CHashtable
 		if (index < 0)
 			index += table.length;
 		
-		if(!table[index].contains(in))
+		for(E elem : table[index])
 		{
-		  table[index].add(in);
-		  numKeys++;
+			if(elem.equals(in))
+				return;
 		}
+		
+		table[index].add(in);
+		numKeys++;
 		
 		if(numKeys > (loadThreshold * table.length))
 			rehash();
@@ -71,9 +77,22 @@ public class CHashtable
 	 * and transferring only non-null and non-deleted elements
 	 * into new array
 	 */
+	@SuppressWarnings("unchecked")
 	private void rehash()
 	{
+		ArrayList<E>[] oldTable = table;
+		table = (ArrayList<E>[]) new ArrayList[2 * oldTable.length + 1];
 		
+		for(int i=0; i<table.length; i++)
+			table[i] = new ArrayList<E>();
+		
+		numKeys = 0;
+
+		for(ArrayList<E> list : oldTable)
+		{
+			for(E elem : list)
+			  add(elem);
+		}
 	}
 	
 	/**
@@ -81,11 +100,24 @@ public class CHashtable
 	 */
 	public void dumpTable()
 	{
-		
+		System.out.println("Table contents: ");
+		for(ArrayList<E> list : table)
+			System.out.println(list + " ");
 	}
 	
 	public static void main(String[] args)
 	{
+		Random r = new Random(42);
+		CHashtable ht = new CHashtable(4, 0.1);
 		
+		for(int i=0; i<100000; i++)
+		{
+			int x = Math.abs(r.nextInt()) % 100000;
+			ht.add(new E(x));
+		}
+		
+		ht.dumpTable();
+		
+		System.out.println(ht.table.length);
 	}
 }
