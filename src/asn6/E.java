@@ -7,7 +7,7 @@ package asn6;
 /**
  * Class to represent a generic object
  */
-public class E
+public class E implements Comparable<E>
 {
 	protected Object value;
 	
@@ -34,6 +34,17 @@ public class E
 		
 		E obj = (E) entry;
 		return (obj.value.equals(this.value));
+	}
+	
+	
+	/**
+	 * Method to compare two E objects
+	 * @return -1 for now
+	 */
+	@Override
+	public int compareTo(E entry)
+	{
+		return -1;
 	}
 	
 	

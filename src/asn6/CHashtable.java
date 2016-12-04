@@ -156,6 +156,9 @@ public class CHashtable
 	}
 	
 	
+	/**
+	 * Method to calculate number of probes
+	 */
 	public void numOfProbes()
 	{
 		numProbes = (double) probes / numKeys;

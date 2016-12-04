@@ -1,6 +1,8 @@
 package asn6;
 
 import java.util.Random;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Enumeration; //allows for methods: boolean hasMoreElements() and <E> nextElement
 import java.util.Iterator;    //maybe this is a better option that Enumerator
 
@@ -17,9 +19,9 @@ public class OAHashtable
 	private double loadThreshold;
 	private int numKeys;
 	private int numDeletes;
-	private int numProbes;
-	private int numRehashes;
+	private double numProbes;
 	private int numFinds;
+	private int numRehashes;
 	private final E DELETED;
 
 	
@@ -148,7 +150,8 @@ public class OAHashtable
 	 */
 	public void displayData()
 	{
-		System.out.println("Number of probes: " + numProbes);
+		DecimalFormat df = new DecimalFormat("#.##");
+		System.out.println("Number of probes: " + df.format(numProbes));
 		System.out.println("Number of rehashes: " + numRehashes);
 	}
 	
@@ -169,12 +172,14 @@ public class OAHashtable
 	{
 		Random r = new Random(42);
 		E deleted = new E(-1);
-		OAHashtable ht = new OAHashtable(5, 0.1, deleted);
-
+		OAHashtable ht = new OAHashtable(4, 0.1, deleted);
+		ArrayList<E> list = new ArrayList<E>(); 
+		
 		for(int i=0; i<20; i++)
 	    {
 	      int x = Math.abs(r.nextInt()) % 1000000;
 	      ht.add(new E(x));
+		  list.add(new E(x));
 	      System.out.print(" " + x);
 	    }
 		
