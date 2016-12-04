@@ -69,7 +69,10 @@ public class CHashtable
 	 */
 	public void remove(E it)
 	{
-		
+		int index = it.value.hashCode() % table.length;
+
+		if(table[index].contains(it))
+			table[index].remove(it);
 	}
 	
 	
@@ -100,6 +103,28 @@ public class CHashtable
 	
 	
 	/**
+	 * Method to find the index of a given object in the hashtable
+	 * @param subject
+	 * @return 
+	 */
+	private int find(E subject)
+	{
+		int index = subject.value.hashCode() % table.length;
+		
+		if (index < 0)
+			index += table.length;
+		
+		while ((table[index] != null) && (!subject.value.equals(table[index])))
+		{
+			index++;
+			if(index >=  table.length)
+				index = 0;
+		}
+		return index;
+	}
+	
+	
+	/**
 	 * Method to print the number of probes and the
 	 * number of rehashes
 	 */
@@ -126,13 +151,14 @@ public class CHashtable
 		Random r = new Random(42);
 		CHashtable ht = new CHashtable(4, 0.1);
 		
-		for(int i=0; i<1000; i++)
+		for(int i=0; i<100; i++)
 		{
 			int x = Math.abs(r.nextInt()) % 100000;
 			ht.add(new E(x));
 			System.out.println(x);
 		}
 		
+		ht.remove(new E(44799));
 		ht.dumpTable();
 		ht.displayData();
 	}
