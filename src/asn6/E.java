@@ -21,6 +21,7 @@ public class E implements Comparable<E>
 	/**
 	 * Method to check whether two values 
 	 */
+	@Override
 	public boolean equals(Object entry)
 	{
 		if(this == entry)

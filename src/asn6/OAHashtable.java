@@ -126,7 +126,7 @@ public class OAHashtable
 		if (index < 0)
 			index += table.length;
 		
-		while ((table[index] != null) && (!subject.value.equals(table[index])))
+		while ((table[index] != null) && (!subject.equals(table[index])))
 		{
 			index++;
 			if(index >=  table.length)
@@ -167,14 +167,14 @@ public class OAHashtable
 	public boolean contains(E subject)
 	{
 		int index = find(subject);
-		
+
 		while(table[index] != null)
 		{
 			if(table[index].equals(subject))
 				return true;
 			
 			index++;
-			if(index >=  table.length)
+			if(index >= table.length)
 				index = 0;
 		}
 		
@@ -189,7 +189,7 @@ public class OAHashtable
 	public void countProbes(E subject)
 	{
 		boolean result = contains(subject);
-		
+
 		if(result)
 		{			
 			int index = subject.value.hashCode() % table.length;
@@ -259,7 +259,7 @@ public class OAHashtable
 		}
 	
 		//ht.remove(new E());
-		ht.dumpTable();
+		//ht.dumpTable();
 		ht.displayData();
 	}
 }
