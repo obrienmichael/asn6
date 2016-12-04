@@ -87,32 +87,6 @@ public class OAHashtable
 	}
 	
 	
-//---------------------------------------------------------------------		
-	
-	//find method from website javamadesoeasy
-	//does not require a getter method but requires a next method to iterate through
-	/*public int locate(Entry<K,V> key)
-	{
-		int hash = hash(key);
-		//Enumeration en = table.keys(); --> temp = temp.nextElement(); ?
-		
-		if (table[hash] == null)
-			return null;
-		else
-		{
-			Entry<E> temp = table[hash];
-			while(temp != null)
-			{
-				if(temp.key.equals(key))
-					return temp.value;
-				temp = temp.next;
-			}
-		return null;	
-		}
-	}*/
-	
-//---------------------------------------------------------------------	
-	//textbook version for find(Object key)
 	/**
 	 * Method to find the index of a given object in the hashtable
 	 * or the first empty spot
