@@ -20,7 +20,7 @@ public class OAHashtable
 	private int numKeys;
 	private int numDeletes;
 	private double numProbes;
-	private int numFinds;
+	private int probes;
 	private int numRehashes;
 	private final E DELETED;
 
@@ -38,7 +38,7 @@ public class OAHashtable
 		table = t;
 		loadThreshold = load;
 		DELETED = deleted;
-		numProbes = 0;
+		probes = 0;
 	}
 	
 	
@@ -121,6 +121,7 @@ public class OAHashtable
 	//textbook version for find(Object key)
 	/**
 	 * Method to find the index of a given object in the hashtable
+	 * or the first empty spot
 	 * @param subject
 	 * @return 
 	 */
@@ -162,6 +163,70 @@ public class OAHashtable
 		}
 	}
 
+	
+	/**
+	 * Method to check if an object is in the hashtable
+	 * @param subject - object searched for
+	 * @return true if it is in hashtable
+	 * 			otherwise false
+	 */
+	public boolean contains(E subject)
+	{
+		int index = find(subject);
+		
+		while(table[index] != null)
+		{
+			if(table[index].equals(subject))
+				return true;
+			
+			index++;
+			if(index >=  table.length)
+				index = 0;
+		}
+		
+		return false;
+	}
+	
+	/**
+	 * Method to count the number of probes it takes to find a
+	 * given object in the hashtable
+	 * @param subject - object searching for
+	 */
+	public void countProbes(E subject)
+	{
+		boolean result = contains(subject);
+		
+		if(result)
+		{			
+			int index = subject.value.hashCode() % table.length;
+			
+			if (index < 0)
+				index += table.length;
+			
+			// FIND
+			
+			/*
+			for(E entry : table[index])
+			{
+				if(entry.equals(subject))
+				{
+					probes++;
+					return;
+				}
+				probes++;
+			}*/
+		}
+	}
+	
+	
+	/**
+	 * Method to calculate number of probes
+	 */
+	public void numOfProbes()
+	{
+		numProbes = (double) probes / numKeys;
+	}
+	
 	
 	/**
 	 * Method to print the number of probes and the
