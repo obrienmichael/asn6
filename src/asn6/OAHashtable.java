@@ -1,6 +1,7 @@
 package asn6;
 
 import java.util.Random;
+import java.lang.reflect.Array;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Enumeration; //allows for methods: boolean hasMoreElements() and <E> nextElement
@@ -34,7 +35,7 @@ public class OAHashtable
 	{
 		@SuppressWarnings("unchecked")
 		//Slinging[] t = (Slinging[]) new Comparable[size];
-		E[] t = (E[]) new Comparable[size];
+		final E[] t = (E[]) new Comparable[size];
 		table = t;
 		loadThreshold = load;
 		DELETED = deleted;
@@ -203,18 +204,19 @@ public class OAHashtable
 			if (index < 0)
 				index += table.length;
 			
-			// FIND
-			
-			/*
-			for(E entry : table[index])
+			while(table[index] != null)
 			{
-				if(entry.equals(subject))
+				if(table[index].equals(subject))
 				{
 					probes++;
 					return;
 				}
+				
 				probes++;
-			}*/
+				index++;
+				if(index >=  table.length)
+					index = 0;
+			}
 		}
 	}
 	
