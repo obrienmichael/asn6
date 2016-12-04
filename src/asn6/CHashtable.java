@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Random;
 
 // This is our code
-//Michael O'Brien, Sydney Pugh
-//CS312
+// Michael O'Brien, Sydney Pugh
+// CS312
 
 /**
  * Hashtable using chaining
@@ -71,6 +71,9 @@ public class CHashtable
 	{
 		int index = it.value.hashCode() % table.length;
 
+		if (index < 0)
+			index += table.length;
+		
 		if(table[index].contains(it))
 			table[index].remove(it);
 	}
@@ -104,23 +107,49 @@ public class CHashtable
 	
 	/**
 	 * Method to find the index of a given object in the hashtable
-	 * @param subject
-	 * @return 
+	 * @param subject - object to be found in hashtable
+	 * @return true if in the hashtable
+	 * 			otherwise false
 	 */
-	private int find(E subject)
+	public boolean find(E subject)
 	{
 		int index = subject.value.hashCode() % table.length;
 		
 		if (index < 0)
 			index += table.length;
 		
-		while ((table[index] != null) && (!subject.value.equals(table[index])))
+		if(table[index].contains(subject))
+			return true;
+		
+		return false;
+	}
+	
+	/**
+	 * Method to count the number of probes it takes to find a
+	 * given object in the hashtable
+	 * @param subject - object searching for
+	 */
+	public void countProbes(E subject)
+	{
+		boolean result = find(subject);
+		
+		if(result)
 		{
-			index++;
-			if(index >=  table.length)
-				index = 0;
+			int index = subject.value.hashCode() % table.length;
+			
+			if (index < 0)
+				index += table.length;
+			
+			for(E entry : table[index])
+			{
+				if(entry.equals(subject))
+				{
+					numProbes++;
+					return;
+				}
+				numProbes++;
+			}
 		}
-		return index;
 	}
 	
 	
@@ -150,15 +179,22 @@ public class CHashtable
 	{
 		Random r = new Random(42);
 		CHashtable ht = new CHashtable(4, 0.1);
+		ArrayList<E> list = new ArrayList<E>(); 
 		
 		for(int i=0; i<100; i++)
 		{
 			int x = Math.abs(r.nextInt()) % 100000;
 			ht.add(new E(x));
+			list.add(new E(x));
 			System.out.println(x);
 		}
 		
-		ht.remove(new E(44799));
+		for(E it : list)
+		{
+			ht.countProbes(it);
+		}
+		
+		//ht.remove(new E(44799));
 		ht.dumpTable();
 		ht.displayData();
 	}

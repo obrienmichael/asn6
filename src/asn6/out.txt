@@ -133,7 +133,7 @@ Table contents:
 [] 
 [] 
 [] 
-[] 
+[Value of E object is 44799] 
 [] 
 [] 
 [] 
@@ -1378,5 +1378,5 @@ Table contents:
 [] 
 [] 
 [] 
-Number of probes: 0
+Number of probes: 102
 Number of rehashes: 8
