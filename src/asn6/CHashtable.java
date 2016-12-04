@@ -17,7 +17,6 @@ public class CHashtable
 	private double loadThreshold;
 	private int numKeys;
 	private int numRehashes;
-	private double numProbes;
 	private int probes;
 	
 	
@@ -36,7 +35,6 @@ public class CHashtable
 			table[i] = new ArrayList<E>();
 		
 		loadThreshold = load;
-		numProbes = 0.0;
 		probes = 0;
 	}
 	

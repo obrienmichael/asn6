@@ -1,11 +1,8 @@
 package asn6;
 
 import java.util.Random;
-import java.lang.reflect.Array;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Enumeration; //allows for methods: boolean hasMoreElements() and <E> nextElement
-import java.util.Iterator;    //maybe this is a better option that Enumerator
 
 // This is our code
 // Michael O'Brien, Sydney Pugh
