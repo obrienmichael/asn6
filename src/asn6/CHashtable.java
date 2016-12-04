@@ -1,5 +1,6 @@
 package asn6;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -16,7 +17,8 @@ public class CHashtable
 	private double loadThreshold;
 	private int numKeys;
 	private int numRehashes;
-	private int numProbes;
+	private double numProbes;
+	private int probes;
 	
 	
 	/**
@@ -34,7 +36,8 @@ public class CHashtable
 			table[i] = new ArrayList<E>();
 		
 		loadThreshold = load;
-		numProbes = 0;
+		numProbes = 0.0;
+		probes = 0;
 	}
 	
 	
@@ -144,12 +147,18 @@ public class CHashtable
 			{
 				if(entry.equals(subject))
 				{
-					numProbes++;
+					probes++;
 					return;
 				}
-				numProbes++;
+				probes++;
 			}
 		}
+	}
+	
+	
+	public void numOfProbes()
+	{
+		numProbes = (double) probes / numKeys;
 	}
 	
 	
@@ -159,7 +168,8 @@ public class CHashtable
 	 */
 	public void displayData()
 	{
-		System.out.println("Number of probes: " + numProbes);
+		DecimalFormat df = new DecimalFormat("#.##");
+		System.out.println("Number of probes: " + df.format(numProbes));
 		System.out.println("Number of rehashes: " + numRehashes);
 	}
 
@@ -181,7 +191,7 @@ public class CHashtable
 		CHashtable ht = new CHashtable(4, 0.1);
 		ArrayList<E> list = new ArrayList<E>(); 
 		
-		for(int i=0; i<100; i++)
+		for(int i=0; i<100000; i++)
 		{
 			int x = Math.abs(r.nextInt()) % 100000;
 			ht.add(new E(x));
@@ -193,7 +203,7 @@ public class CHashtable
 		{
 			ht.countProbes(it);
 		}
-		
+		ht.numOfProbes();
 		//ht.remove(new E(44799));
 		ht.dumpTable();
 		ht.displayData();
