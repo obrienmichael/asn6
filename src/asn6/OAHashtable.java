@@ -60,7 +60,6 @@ public class OAHashtable
 	 * Method to remove an object from the hash table
 	 * @param it - object to be removed
 	 */
-	//need to use find/locate method within remove method?
 	public void remove(E it)
 	{
 		int index = it.value.hashCode() % table.length;

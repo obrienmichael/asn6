@@ -197,7 +197,7 @@ public class CHashtable
 		}
 		
 		//ht.remove(new E(44799));
-		ht.dumpTable();
+		//ht.dumpTable();
 		ht.displayData();
 	}
 }
