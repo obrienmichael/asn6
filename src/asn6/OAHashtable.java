@@ -20,7 +20,6 @@ public class OAHashtable
 	private double loadThreshold;
 	private int numKeys;
 	private int numDeletes;
-	private double numProbes;
 	private int probes;
 	private int numRehashes;
 	private final E DELETED;
@@ -33,10 +32,7 @@ public class OAHashtable
 	 */
 	public OAHashtable(int size, double load, E deleted)
 	{
-		@SuppressWarnings("unchecked")
-		//Slinging[] t = (Slinging[]) new Comparable[size];
-		final E[] t = (E[]) new Comparable[size];
-		table = t;
+		table = new E[size];
 		loadThreshold = load;
 		DELETED = deleted;
 		probes = 0;
@@ -222,22 +218,13 @@ public class OAHashtable
 	
 	
 	/**
-	 * Method to calculate number of probes
-	 */
-	public void numOfProbes()
-	{
-		numProbes = (double) probes / numKeys;
-	}
-	
-	
-	/**
 	 * Method to print the number of probes and the
 	 * number of rehashes
 	 */
 	public void displayData()
 	{
 		DecimalFormat df = new DecimalFormat("#.##");
-		System.out.println("Number of probes: " + df.format(numProbes));
+		System.out.println("Number of probes: " + df.format((double) probes / numKeys));
 		System.out.println("Number of rehashes: " + numRehashes);
 	}
 	
@@ -269,6 +256,11 @@ public class OAHashtable
 	      //System.out.print(" " + x);
 	    }
 		
+		for(E in : list)
+		{
+			ht.countProbes(in);
+		}
+	
 		//ht.remove(new E());
 		ht.dumpTable();
 		ht.displayData();

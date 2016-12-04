@@ -157,22 +157,13 @@ public class CHashtable
 	
 	
 	/**
-	 * Method to calculate number of probes
-	 */
-	public void numOfProbes()
-	{
-		numProbes = (double) probes / numKeys;
-	}
-	
-	
-	/**
 	 * Method to print the number of probes and the
 	 * number of rehashes
 	 */
 	public void displayData()
 	{
 		DecimalFormat df = new DecimalFormat("#.##");
-		System.out.println("Number of probes: " + df.format(numProbes));
+		System.out.println("Number of probes: " + df.format((double) probes / numKeys));
 		System.out.println("Number of rehashes: " + numRehashes);
 	}
 
@@ -207,7 +198,6 @@ public class CHashtable
 			ht.countProbes(in);
 		}
 		
-		ht.numOfProbes();
 		//ht.remove(new E(44799));
 		ht.dumpTable();
 		ht.displayData();
