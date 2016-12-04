@@ -48,7 +48,6 @@ public class OAHashtable
 	 */
 	public void add(E in)
 	{
-		@SuppressWarnings("unchecked")
 		int index = find(in);
 
 		if(table[index] == null)
@@ -70,7 +69,27 @@ public class OAHashtable
 	//need to use find/locate method within remove method?
 	public void remove(E it)
 	{
+		int index = it.value.hashCode() % table.length;
 		
+		if (index < 0)
+			index += table.length;
+		
+		if(table[index] == null)
+			return;
+		
+		while(table[index] != null)
+		{
+			if(table[index].equals(it))
+			{
+				table[index] = DELETED;
+				numDeletes++;
+				numKeys--;
+			}
+			
+			index++;
+			if(index >=  table.length)
+				index = 0;
+		}
 	}
 	
 	
@@ -127,7 +146,6 @@ public class OAHashtable
 	 * and transferring only non-null and non-deleted elements
 	 * into new array
 	 */
-	@SuppressWarnings("unchecked")
 	private void rehash()
 	{
 		numRehashes++;
@@ -176,14 +194,15 @@ public class OAHashtable
 		OAHashtable ht = new OAHashtable(4, 0.1, deleted);
 		ArrayList<E> list = new ArrayList<E>(); 
 		
-		for(int i=0; i<20; i++)
+		for(int i=0; i<100; i++)
 	    {
 	      int x = Math.abs(r.nextInt()) % 1000000;
 	      ht.add(new E(x));
 		  list.add(new E(x));
-	      System.out.print(" " + x);
+	      //System.out.print(" " + x);
 	    }
 		
+		//ht.remove(new E());
 		ht.dumpTable();
 		ht.displayData();
 	}
