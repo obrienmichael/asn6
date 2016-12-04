@@ -137,7 +137,7 @@ public class CHashtable
 		boolean result = find(subject);
 		
 		if(result)
-		{
+		{			
 			int index = subject.value.hashCode() % table.length;
 			
 			if (index < 0)
@@ -199,13 +199,14 @@ public class CHashtable
 			int x = Math.abs(r.nextInt()) % 100000;
 			ht.add(new E(x));
 			list.add(new E(x));
-			System.out.println(x);
+			//System.out.println(x);
 		}
 		
-		for(E it : list)
+		for(E in : list)
 		{
-			ht.countProbes(it);
+			ht.countProbes(in);
 		}
+		
 		ht.numOfProbes();
 		//ht.remove(new E(44799));
 		ht.dumpTable();

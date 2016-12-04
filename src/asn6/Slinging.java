@@ -5,7 +5,7 @@ package asn6;
 //CS312
 
 /**
- *
+ * Class to represent a Slinging
  */
 public class Slinging implements Comparable<Slinging>
 {

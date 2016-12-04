@@ -33,6 +33,7 @@ public class OAHashtable
 	public OAHashtable(int size, double load, E deleted)
 	{
 		@SuppressWarnings("unchecked")
+		//Slinging[] t = (Slinging[]) new Comparable[size];
 		E[] t = (E[]) new Comparable[size];
 		table = t;
 		loadThreshold = load;
