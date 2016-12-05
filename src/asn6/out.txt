@@ -1,16 +1,19 @@
-Number of probes: 1
-Number of rehashes: 17
+Number of ps 110534
+Number of probes: 1.11
+Number of rehashes: 14
 
  
  
  
 
-Number of probes: 1
-Number of rehashes: 17
+Number of ps 80659
+Number of probes: 1.09
+Number of rehashes: 14
 
  
  
  
 
-Number of probes: 1
-Number of rehashes: 15
+Number of ps 23064
+Number of probes: 1.31
+Number of rehashes: 12

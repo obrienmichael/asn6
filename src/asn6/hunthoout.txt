@@ -5,12 +5,12 @@ Number of rehashes: 15
  
  
 
-Number of probes: 1
-Number of rehashes: 15
+Number of probes: 641.36
+Number of rehashes: 14
 
  
  
  
 
-Number of probes: 18.71
+Number of probes: 1.55
 Number of rehashes: 14

@@ -169,6 +169,7 @@ public class CHashtable
 	public void displayData()
 	{
 		DecimalFormat df = new DecimalFormat("#.##");
+		System.out.println("Number of ps " + probes);
 		System.out.println("Number of probes: " + df.format((double) probes / finds));
 		System.out.println("Number of rehashes: " + numRehashes);
 	}

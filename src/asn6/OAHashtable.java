@@ -221,7 +221,7 @@ public class OAHashtable
 	{
 		Random r = new Random(42);
 		E deleted = new E(-1);
-		OAHashtable ht = new OAHashtable(4, 0.75, deleted);
+		OAHashtable ht = new OAHashtable(4, 0.1, deleted);
 		ArrayList<E> list = new ArrayList<E>(); 
 		
 		for(int i=0; i<100000; i++)
@@ -236,15 +236,12 @@ public class OAHashtable
 	
 		ht.displayData();
 		
-		
-		
-		
-		
+
 		
 		// K=20% Deletion
 		System.out.println("\n \n \n \n");
 		Random s = new Random();
-		OAHashtable ht2 = new OAHashtable(4, 0.75, deleted);
+		OAHashtable ht2 = new OAHashtable(4, 0.1, deleted);
 		ArrayList<E> list2 = new ArrayList<E>(); 
 
 		for(int i=0; i<100000; i++)
@@ -267,12 +264,10 @@ public class OAHashtable
 		ht2.displayData();
 
 
-
-
 		// K=80% Deletion
 		System.out.println("\n \n \n \n");
 		Random y = new Random();
-		OAHashtable ht3 = new OAHashtable(4, 0.75, deleted);
+		OAHashtable ht3 = new OAHashtable(4, 0.1, deleted);
 		ArrayList<E> list3 = new ArrayList<E>(); 
 
 
