@@ -18,6 +18,7 @@ public class OAHashtable
 	private int numKeys;
 	private int numDeletes;
 	private int probes;
+	private int finds;
 	private int numRehashes;
 	private final E DELETED;
 
@@ -183,6 +184,8 @@ public class OAHashtable
 				if(index >=  table.length)
 					index = 0;
 			}
+			
+			finds++;
 		}
 	}
 	
@@ -194,7 +197,7 @@ public class OAHashtable
 	public void displayData()
 	{
 		DecimalFormat df = new DecimalFormat("#.##");
-		System.out.println("Number of probes: " + df.format((double) probes / numKeys));
+		System.out.println("Number of probes: " + df.format((double) probes / finds));
 		System.out.println("Number of rehashes: " + numRehashes);
 	}
 	
@@ -223,15 +226,11 @@ public class OAHashtable
 	      int x = Math.abs(r.nextInt()) % 1000000;
 	      ht.add(new E(x));
 		  list.add(new E(x));
-	      //System.out.print(" " + x);
 	    }
 		
 		for(E in : list)
-		{
 			ht.countProbes(in);
-		}
 	
-		//ht.remove(new E());
 		//ht.dumpTable();
 		ht.displayData();
 		
@@ -263,7 +262,7 @@ public class OAHashtable
 		for(E in : list2)
 			ht2.countProbes(in);
 
-		ht2.dumpTable();
+		//ht2.dumpTable();
 		ht2.displayData();
 
 
@@ -293,7 +292,7 @@ public class OAHashtable
 		for(E in : list3)
 			ht3.countProbes(in);
 
-		ht3.dumpTable();
+		//ht3.dumpTable();
 		ht3.displayData();
 	}
 }

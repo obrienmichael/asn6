@@ -14,7 +14,7 @@ public class Slinging implements Comparable<Slinging>
   
   /**
    * 
-   * @param cnt - number of ___
+   * @param cnt - number of taters
    */
   public Slinging(int cnt)
   {

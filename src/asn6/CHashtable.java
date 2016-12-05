@@ -18,6 +18,7 @@ public class CHashtable
 	private int numKeys;
 	private int numRehashes;
 	private int probes;
+	private int finds;
 	
 	
 	/**
@@ -150,6 +151,8 @@ public class CHashtable
 				}
 				probes++;
 			}
+			
+			finds++;
 		}
 	}
 	
@@ -161,7 +164,7 @@ public class CHashtable
 	public void displayData()
 	{
 		DecimalFormat df = new DecimalFormat("#.##");
-		System.out.println("Number of probes: " + df.format((double) probes / numKeys));
+		System.out.println("Number of probes: " + df.format((double) probes / finds));
 		System.out.println("Number of rehashes: " + numRehashes);
 	}
 
@@ -194,7 +197,7 @@ public class CHashtable
 		for(E in : list)
 			ht.countProbes(in);
 		
-		ht.dumpTable();
+		//ht.dumpTable();
 		ht.displayData();
 		
 		
@@ -223,7 +226,7 @@ public class CHashtable
 		for(E in : list2)
 			ht2.countProbes(in);
 		
-		ht2.dumpTable();
+		//ht2.dumpTable();
 		ht2.displayData();
 
 		
@@ -253,7 +256,7 @@ public class CHashtable
 		for(E in : list3)
 			ht3.countProbes(in);
 		
-		ht3.dumpTable();
+		//ht3.dumpTable();
 		ht3.displayData();
 	}
 }
