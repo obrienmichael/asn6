@@ -215,8 +215,6 @@ public class CHashtable
 			if(s.nextInt(101) <= 20)
 			{
 				E item = list2.get(new Random().nextInt(list2.size()));	
-				System.out.println("Removed: " + item);
-
 				ht2.remove(item);
 				list2.remove(item);
 			}
@@ -247,8 +245,6 @@ public class CHashtable
 			if(y.nextInt(101) <= 80)
 			{
 				E item = list3.get(new Random().nextInt(list3.size()));	
-				System.out.println("Removed: " + item);
-
 				ht3.remove(item);
 				list3.remove(item);
 			}
