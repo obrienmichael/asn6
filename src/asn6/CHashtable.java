@@ -179,25 +179,85 @@ public class CHashtable
 	
 	public static void main(String[] args)
 	{
+		// No Deletions
 		Random r = new Random(42);
 		CHashtable ht = new CHashtable(4, 0.1);
 		ArrayList<E> list = new ArrayList<E>(); 
 		
-		for(int i=0; i<100000; i++)
+		for(int i=0; i<100; i++)
 		{
 			int x = Math.abs(r.nextInt()) % 100000;
 			ht.add(new E(x));
 			list.add(new E(x));
-			//System.out.println(x);
 		}
 		
 		for(E in : list)
-		{
 			ht.countProbes(in);
+		
+		ht.dumpTable();
+		ht.displayData();
+		
+		
+		
+		
+		// K=20% Deletion
+		System.out.println("\n \n \n \n");
+		Random s = new Random();
+		CHashtable ht2 = new CHashtable(4, 0.1);
+		ArrayList<E> list2 = new ArrayList<E>(); 
+
+		for(int i=0; i<100; i++)
+		{
+			int x = Math.abs(r.nextInt()) % 100000;
+			ht2.add(new E(x));
+			list2.add(new E(x));
+			
+			if(s.nextInt(101) <= 20)
+			{
+				E item = list2.get(new Random().nextInt(list2.size()));	
+				System.out.println("Removed: " + item);
+
+				ht2.remove(item);
+				list2.remove(item);
+			}
 		}
 		
-		//ht.remove(new E(44799));
-		//ht.dumpTable();
-		ht.displayData();
+		for(E in : list2)
+			ht2.countProbes(in);
+		
+		ht2.dumpTable();
+		ht2.displayData();
+
+		
+		
+		
+		// K=80% Deletion
+		System.out.println("\n \n \n \n");
+		Random y = new Random();
+		CHashtable ht3 = new CHashtable(4, 0.1);
+		ArrayList<E> list3 = new ArrayList<E>(); 
+		
+
+		for(int i=0; i<100; i++)
+		{
+			int x = Math.abs(r.nextInt()) % 100000;
+			ht3.add(new E(x));
+			list3.add(new E(x));
+			
+			if(y.nextInt(101) <= 80)
+			{
+				E item = list3.get(new Random().nextInt(list3.size()));	
+				System.out.println("Removed: " + item);
+
+				ht3.remove(item);
+				list3.remove(item);
+			}
+		}
+		
+		for(E in : list3)
+			ht3.countProbes(in);
+		
+		ht3.dumpTable();
+		ht3.displayData();
 	}
 }
