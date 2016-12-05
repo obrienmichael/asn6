@@ -224,7 +224,7 @@ public class OAHashtable
 		OAHashtable ht = new OAHashtable(4, 0.1, deleted);
 		ArrayList<E> list = new ArrayList<E>(); 
 		
-		for(int i=0; i<100; i++)
+		for(int i=0; i<100000; i++)
 	    {
 	      int x = Math.abs(r.nextInt()) % 1000000;
 	      ht.add(new E(x));
@@ -247,7 +247,7 @@ public class OAHashtable
 		OAHashtable ht2 = new OAHashtable(4, 0.1, deleted);
 		ArrayList<E> list2 = new ArrayList<E>(); 
 
-		for(int i=0; i<100; i++)
+		for(int i=0; i<100000; i++)
 		{
 			int x = Math.abs(r.nextInt()) % 100000;
 			ht2.add(new E(x));
@@ -276,7 +276,7 @@ public class OAHashtable
 		ArrayList<E> list3 = new ArrayList<E>(); 
 
 
-		for(int i=0; i<100; i++)
+		for(int i=0; i<100000; i++)
 		{
 			int x = Math.abs(r.nextInt()) % 100000;
 			ht3.add(new E(x));

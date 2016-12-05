@@ -192,7 +192,7 @@ public class CHashtable
 		CHashtable ht = new CHashtable(4, 0.1);
 		ArrayList<E> list = new ArrayList<E>(); 
 		
-		for(int i=0; i<100; i++)
+		for(int i=0; i<100000; i++)
 		{
 			int x = Math.abs(r.nextInt()) % 100000;
 			ht.add(new E(x));
@@ -242,7 +242,7 @@ public class CHashtable
 		ArrayList<E> list3 = new ArrayList<E>(); 
 		
 
-		for(int i=0; i<100; i++)
+		for(int i=0; i<100000; i++)
 		{
 			int x = Math.abs(r.nextInt()) % 100000;
 			ht3.add(new E(x));
