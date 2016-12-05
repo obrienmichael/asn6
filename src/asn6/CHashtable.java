@@ -36,7 +36,10 @@ public class CHashtable
 			table[i] = new ArrayList<E>();
 		
 		loadThreshold = load;
+		numKeys = 0;
+		numRehashes = 0;
 		probes = 0;
+		finds = 0;
 	}
 	
 	
@@ -58,6 +61,7 @@ public class CHashtable
 		}
 		
 		table[index].add(in);
+		
 		numKeys++;
 		
 		if(numKeys > (loadThreshold * table.length))
@@ -78,6 +82,8 @@ public class CHashtable
 		
 		if(table[index].contains(it))
 			table[index].remove(it);
+	
+		numKeys--;
 	}
 	
 	
@@ -197,7 +203,6 @@ public class CHashtable
 		for(E in : list)
 			ht.countProbes(in);
 		
-		//ht.dumpTable();
 		ht.displayData();
 		
 		
@@ -209,7 +214,7 @@ public class CHashtable
 		CHashtable ht2 = new CHashtable(4, 0.1);
 		ArrayList<E> list2 = new ArrayList<E>(); 
 
-		for(int i=0; i<100; i++)
+		for(int i=0; i<100000; i++)
 		{
 			int x = Math.abs(r.nextInt()) % 100000;
 			ht2.add(new E(x));
@@ -226,7 +231,6 @@ public class CHashtable
 		for(E in : list2)
 			ht2.countProbes(in);
 		
-		//ht2.dumpTable();
 		ht2.displayData();
 
 		
@@ -256,7 +260,6 @@ public class CHashtable
 		for(E in : list3)
 			ht3.countProbes(in);
 		
-		//ht3.dumpTable();
 		ht3.displayData();
 	}
 }

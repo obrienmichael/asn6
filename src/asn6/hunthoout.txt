@@ -1,16 +1,7 @@
+
+ 
+ 
+ 
+
 Number of probes: ∞
 Number of rehashes: 8
-
- 
- 
- 
-
-Number of probes: 1.04
-Number of rehashes: 8
-
- 
- 
- 
-
-Number of probes: 0.26
-Number of rehashes: 7

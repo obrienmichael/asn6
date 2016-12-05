@@ -33,7 +33,11 @@ public class OAHashtable
 		table = new E[size];
 		loadThreshold = load;
 		DELETED = deleted;
+		numKeys = 0;
+		numDeletes = 0;
 		probes = 0;
+		finds = 0;
+		numRehashes = 0;
 	}
 	
 	
@@ -176,6 +180,7 @@ public class OAHashtable
 				if(table[index].equals(subject))
 				{
 					probes++;
+					finds++;
 					return;
 				}
 				
@@ -184,8 +189,6 @@ public class OAHashtable
 				if(index >=  table.length)
 					index = 0;
 			}
-			
-			finds++;
 		}
 	}
 	
@@ -197,7 +200,9 @@ public class OAHashtable
 	public void displayData()
 	{
 		DecimalFormat df = new DecimalFormat("#.##");
-		System.out.println("Number of probes: " + df.format((double) probes / finds));
+		System.out.println("Finds is " + finds);
+		System.out.println("The fuck");
+		//System.out.println("Number of probes: " + df.format((double) probes / finds));
 		System.out.println("Number of rehashes: " + numRehashes);
 	}
 	
@@ -217,7 +222,7 @@ public class OAHashtable
 	public static void main(String [] args)
 	{
 		Random r = new Random(42);
-		E deleted = new E(-1);
+		/*E deleted = new E(-1);
 		OAHashtable ht = new OAHashtable(4, 0.1, deleted);
 		ArrayList<E> list = new ArrayList<E>(); 
 		
@@ -231,8 +236,7 @@ public class OAHashtable
 		for(E in : list)
 			ht.countProbes(in);
 	
-		//ht.dumpTable();
-		ht.displayData();
+		ht.displayData();*/
 		
 		
 		
@@ -262,14 +266,13 @@ public class OAHashtable
 		for(E in : list2)
 			ht2.countProbes(in);
 
-		//ht2.dumpTable();
 		ht2.displayData();
 
 
 
 
 		// K=80% Deletion
-		System.out.println("\n \n \n \n");
+		/*System.out.println("\n \n \n \n");
 		Random y = new Random();
 		CHashtable ht3 = new CHashtable(4, 0.1);
 		ArrayList<E> list3 = new ArrayList<E>(); 
@@ -292,7 +295,6 @@ public class OAHashtable
 		for(E in : list3)
 			ht3.countProbes(in);
 
-		//ht3.dumpTable();
-		ht3.displayData();
+		ht3.displayData();*/
 	}
 }

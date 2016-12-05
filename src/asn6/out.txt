@@ -6,11 +6,11 @@ Number of rehashes: 8
  
 
 Number of probes: ∞
-Number of rehashes: 8
+Number of rehashes: 17
 
  
  
  
 
 Number of probes: ∞
-Number of rehashes: 7
+Number of rehashes: 6
