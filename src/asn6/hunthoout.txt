@@ -1,16 +1,16 @@
+Number of probes: 1.58
+Number of rehashes: 15
+
+ 
+ 
+ 
+
 Number of probes: 1
-Number of rehashes: 18
+Number of rehashes: 15
 
  
  
  
 
-Number of probes: 1.13
-Number of rehashes: 17
-
- 
- 
- 
-
-Number of probes: 1.45
-Number of rehashes: 17
+Number of probes: 18.71
+Number of rehashes: 14
