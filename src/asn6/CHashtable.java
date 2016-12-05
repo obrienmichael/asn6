@@ -153,12 +153,11 @@ public class CHashtable
 				if(entry.equals(subject))
 				{
 					probes++;
+					finds++;
 					return;
 				}
 				probes++;
-			}
-			
-			finds++;
+			}		
 		}
 	}
 	

@@ -200,9 +200,7 @@ public class OAHashtable
 	public void displayData()
 	{
 		DecimalFormat df = new DecimalFormat("#.##");
-		System.out.println("Finds is " + finds);
-		System.out.println("The fuck");
-		//System.out.println("Number of probes: " + df.format((double) probes / finds));
+		System.out.println("Number of probes: " + df.format((double) probes / finds));
 		System.out.println("Number of rehashes: " + numRehashes);
 	}
 	
@@ -222,7 +220,7 @@ public class OAHashtable
 	public static void main(String [] args)
 	{
 		Random r = new Random(42);
-		/*E deleted = new E(-1);
+		E deleted = new E(-1);
 		OAHashtable ht = new OAHashtable(4, 0.1, deleted);
 		ArrayList<E> list = new ArrayList<E>(); 
 		
@@ -236,7 +234,7 @@ public class OAHashtable
 		for(E in : list)
 			ht.countProbes(in);
 	
-		ht.displayData();*/
+		ht.displayData();
 		
 		
 		
@@ -246,7 +244,7 @@ public class OAHashtable
 		// K=20% Deletion
 		System.out.println("\n \n \n \n");
 		Random s = new Random();
-		CHashtable ht2 = new CHashtable(4, 0.1);
+		OAHashtable ht2 = new OAHashtable(4, 0.1, deleted);
 		ArrayList<E> list2 = new ArrayList<E>(); 
 
 		for(int i=0; i<100; i++)
@@ -272,9 +270,9 @@ public class OAHashtable
 
 
 		// K=80% Deletion
-		/*System.out.println("\n \n \n \n");
+		System.out.println("\n \n \n \n");
 		Random y = new Random();
-		CHashtable ht3 = new CHashtable(4, 0.1);
+		OAHashtable ht3 = new OAHashtable(4, 0.1, deleted);
 		ArrayList<E> list3 = new ArrayList<E>(); 
 
 
@@ -295,6 +293,6 @@ public class OAHashtable
 		for(E in : list3)
 			ht3.countProbes(in);
 
-		ht3.displayData();*/
+		ht3.displayData();
 	}
 }

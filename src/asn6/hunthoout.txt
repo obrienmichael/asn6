@@ -1,7 +1,19 @@
-
- 
- 
- 
-
-Number of probes: ∞
+Finds is 100
+Number of probes: 1
 Number of rehashes: 8
+
+ 
+ 
+ 
+
+Finds is 82
+Number of probes: 1.06
+Number of rehashes: 8
+
+ 
+ 
+ 
+
+Finds is 20
+Number of probes: 1.05
+Number of rehashes: 7
